@@ -23,7 +23,6 @@ from flask_babel import Babel
 from flask_login import LoginManager
 from app.socket_manager import SocketManager
 from datetime import datetime
-import os
 import config
 
 

@@ -17,15 +17,13 @@
  along with this program; if not, see <http://www.gnu.org/licenses/>.
 """
 
-from flask import Flask, render_template, request, jsonify, flash, session, redirect, url_for, send_file
+from flask import render_template, request, flash, redirect, send_file
 from flask_babel import lazy_gettext as _l
 from flask_login import current_user, login_user, login_required, logout_user
-from dateutil import rrule
-from datetime import datetime, timedelta
-from user_agents import parse
+from datetime import datetime
 from flask_weasyprint import HTML, render_pdf
 from . import admin, supervisor_functions, notification_functions
-from .. import db, server, login_manager
+from .. import server, login_manager
 from ..models import SupervisorAccount, Role, Notification
 import config
 import math
@@ -114,8 +112,6 @@ def master_updates():
 @admin.route("/admin/regcodes", methods=["GET", "POST"])
 @login_required
 def reg_codes():
-    date = datetime.today().date()
-
     if "search_box" in request.form:
         search_term = request.form["search_box"].lower()
         search_results = server.get_reg_codes_search_results(search_term)
@@ -134,7 +130,7 @@ def reg_codes():
 
     if "switch_page_btn" in request.form:
         current_page = int(request.form["switch_page_btn"]) - 1
-        if current_page >= 0 and current_page <= page_count:
+        if 0 <= current_page <= page_count:
             offset = current_page * limit
             rows = server.construct_reg_code_list(limit, offset)
             return render_template("/admin/regcodes.html", rows=rows, page_count=page_count, current_page=current_page+1)
@@ -374,7 +370,6 @@ def reg_code(reg_key):
             max_saved_volume, initial_volume, daily_topup_volume, shaping_speed, traffy_ip, traffy_domain, max_devices = server.get_instruction_pdf_values()
             first_name, last_name, room = server.get_reg_code_identity(reg_key)
             creation_date = str(int(time.time()))
-            current_supervisor = current_user.get_last_name() + ", " + current_user.get_first_name() + " (" + current_user.get_role() + ")"
 
             html = render_template("/admin/pdf/instruction.html",
                                    reg_key=reg_key,
@@ -695,8 +690,6 @@ def add_account():
 @admin.route("/admin/infrastructure", methods=["GET", "POST"])
 @login_required
 def infrastructure():
-    date = datetime.today().date()
-
     if "search_box" in request.form:
         search_term = request.form["search_box"].lower()
         search_results = server.get_reg_codes_search_results(search_term)
@@ -821,7 +814,7 @@ def unauthorized():
     flash(_l("Login to access that resource."))
     return redirect("/admin/login")
 
-class AccountRow():
+class AccountRow:
     username = ""
     last_name = ""
     first_name = ""
@@ -833,7 +826,7 @@ class AccountRow():
         self.first_name = first_name
         self.role = role
 
-class NotificationRow():
+class NotificationRow:
     id = NotImplemented
     title = ""
     body = ""

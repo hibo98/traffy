@@ -1,4 +1,3 @@
-from .. import db
 from ..models import Notification
 from datetime import datetime
 from sqlalchemy import and_

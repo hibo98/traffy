@@ -18,13 +18,12 @@
 """
 
 from git import Repo
-from flask import Flask, render_template, request, flash, session, redirect, make_response
+from flask import render_template, request, flash, session, redirect, make_response
 from flask_babel import lazy_gettext as _l
 from . import user, notification_functions
-from .. import server, babel, client_version
+from .. import server, babel
 import config
 import json
-import os
 
 
 
@@ -58,7 +57,6 @@ def index():
 @user.route("/register", methods=["GET", "POST"])
 def register():
     if config.STATELESS:
-        branch_name, commits = __get_developer_infos()
         return redirect("/about")
 
     ip_address = request.environ.get("HTTP_X_REAL_IP", request.remote_addr)

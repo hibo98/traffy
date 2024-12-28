@@ -21,7 +21,7 @@ import socket
 from xmlrpc.client import ServerProxy
 
 
-class SocketManager():
+class SocketManager:
     server = NotImplemented
 
     def __init__(self):
