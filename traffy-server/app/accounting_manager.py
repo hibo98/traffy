@@ -26,7 +26,7 @@ import config
 import logging
 
 
-class AccountingService():
+class AccountingService:
     db = NotImplemented
     accounting_thread = NotImplemented
     shaped_reg_keys = []
@@ -396,7 +396,7 @@ class AccountingThread(threading.Thread):
             for range in config.TIME_RANGES_UNLIMITED_DATA:
                 start = range[0]
                 end = range[1]
-                if current_time > start and current_time < end:
+                if start < current_time < end:
                     in_unlimited_time_range = True
                     break
         except:

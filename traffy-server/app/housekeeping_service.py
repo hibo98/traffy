@@ -17,15 +17,13 @@
  along with this program; if not, see <http://www.gnu.org/licenses/>.
 """
 
-from app.models import RegistrationKey, IpAddress, AddressPair, Traffic, Identity
-from datetime import datetime, timedelta
-from dateutil import rrule
+from app.models import RegistrationKey, IpAddress, AddressPair, Identity
+from datetime import datetime
 import threading, time
-import config
 import logging
 
 
-class HousekeepingService():
+class HousekeepingService:
     db = NotImplemented
     interval = NotImplemented
     housekeeping_thread = NotImplemented

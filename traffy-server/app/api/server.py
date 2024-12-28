@@ -18,7 +18,6 @@
 """
 
 from app.exceptions.user_exceptions import RegistrationError, DatabaseError, DeregistrationError
-from enum import Enum
 from ..models import IdentityUpdate, RegistrationKey, IpAddress, MacAddress, AddressPair, Traffic, Identity, Dormitory
 from ..util import tc_manager, nftables_manager
 from datetime import datetime, timedelta
@@ -27,10 +26,8 @@ from user_agents import parse
 from sqlalchemy.sql import func
 from sqlalchemy import and_
 import json
-import time
 import codecs
 import config
-import threading
 import urllib.request as urllib2
 import uuid
 
@@ -177,7 +174,7 @@ class ServerAPI:
         for range in config.TIME_RANGES_UNLIMITED_DATA:
             start = range[0]
             end = range[1]
-            if current_time > start and current_time < end:
+            if start < current_time < end:
                 in_unlimited_time_range = True
                 break
         return in_unlimited_time_range
@@ -1303,9 +1300,9 @@ class ServerAPI:
             reader = codecs.getreader("utf-8")
             obj = json.load(reader(response))
 
-            return(obj["result"]["company"])
+            return obj["result"]["company"]
         except:
-            return("N/A")
+            return "N/A"
     
     def __migration_init_vendor_column(self):
         session = self.db.create_session()
@@ -1336,7 +1333,7 @@ class ServerAPI:
             return None
 
 
-class AccessMode():
+class AccessMode:
     def __init__(self, unregistered=None, registered=None, outside_lan=None, no_lease=None, device_registered_with_different_port=None, deactivated=None, error=None):
         self.unregistered = unregistered
         self.registered = registered
@@ -1347,7 +1344,7 @@ class AccessMode():
         self.error = error
 
 
-class KeyRow():
+class KeyRow:
     reg_key = ""
     last_name = ""
     first_name = ""
@@ -1388,7 +1385,7 @@ class KeyRow():
     def set_flag_move(self, boolean):
         self.flags["move"] = boolean
 
-class IdentityRow():
+class IdentityRow:
     id = ""
     person_id = ""
     last_name = ""
@@ -1416,7 +1413,7 @@ class IdentityRow():
         self.ib_needed = ib_needed
         self.ib_expiry_date = ib_expiry_date
 
-class IdentityRowUpdate():
+class IdentityRowUpdate:
     local_id = ""
     local_person_id = ""
     local_last_name = ""
@@ -1511,7 +1508,7 @@ class IdentityRowUpdate():
             self.different_ib_expiry_date = True
 
 
-class DeviceRow():
+class DeviceRow:
     ip_address = ""
     mac_address = ""
     type = ""

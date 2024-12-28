@@ -19,7 +19,6 @@
 
 import config
 import logging
-import os
 import shlex
 import subprocess
 

@@ -18,7 +18,6 @@
 """
 
 from datetime import datetime
-from sqlalchemy.sql import text
 from sqlalchemy.ext.declarative import declarative_base
 import sqlalchemy as db
 

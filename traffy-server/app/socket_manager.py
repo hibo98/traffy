@@ -19,11 +19,10 @@
 
 from app.api.server import ServerAPI
 from xmlrpc.server import SimpleXMLRPCServer
-from random import randint
 import threading
 
 
-class SocketManager():
+class SocketManager:
     run = True
     server = NotImplemented
     rpc = NotImplemented

@@ -17,17 +17,13 @@
  along with this program; if not, see <http://www.gnu.org/licenses/>.
 """
 
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session
-from sqlalchemy.schema import CreateSchema
 from sqlalchemy import MetaData
-import os
 import sqlalchemy as db
 import config
-import threading
 
 
-class DatabaseManager():
+class DatabaseManager:
     engine = NotImplemented
     session_factory = NotImplemented
     session_scoped = NotImplemented

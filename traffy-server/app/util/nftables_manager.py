@@ -19,7 +19,6 @@
 
 import config
 import json
-import os
 import subprocess
 import shlex
 
@@ -174,7 +173,7 @@ def add_unregistered_exception_accept_rules():
 
 def add_captive_portal_rewrite_rule():
     __execute_command(
-        "add rule ip traffy captive-portal tcp dport { 80, 443 } dnat %s" % (config.WAN_IP_ADDRESS)
+        "add rule ip traffy captive-portal tcp dport { 80, 443 } dnat %s" % config.WAN_IP_ADDRESS
     )
 
 def add_unregistered_drop_rule():

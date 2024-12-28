@@ -24,15 +24,12 @@ from app.util import tc_manager, nftables_manager
 from datetime import datetime
 from app.accounting_manager import AccountingService
 from app.housekeeping_service import HousekeepingService
-import os
 import logging
-import threading
 import config
 import signal
-import sys
 
 
-class Server():
+class Server:
     boot_timestamp = NotImplemented
     db = NotImplemented
     accounting_srv = NotImplemented
