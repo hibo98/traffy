@@ -10,187 +10,186 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-10-30 20:37+0200\n"
-"PO-Revision-Date: 2021-10-30 23:16+0200\n"
+"POT-Creation-Date: 2025-03-13 10:45+0100\n"
+"PO-Revision-Date: 2025-03-13 10:50+0100\n"
 "Last-Translator: Niklas Merkelt <niklasmerkelt@mail.de>\n"
-"Language: de_DE\n"
 "Language-Team: German - Germany < >\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Language: de_DE\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.1\n"
-"X-Generator: Gtranslator 40.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.8.0\n"
+"X-Generator: Poedit 3.5\n"
 
-#: app/admin/views.py:56
+#: app/admin/views.py:54
 msgid "Wrong credentials. This attempt got reported."
 msgstr "Ungültige Zugangsdaten. Der Anmeldeversuch wurde gemeldet."
 
-#: app/admin/views.py:63 app/admin/views.py:67 app/admin/views.py:502
-#: app/admin/views.py:506 app/user/views.py:202 app/user/views.py:206
+#: app/admin/views.py:61 app/admin/views.py:65 app/admin/views.py:497
+#: app/admin/views.py:501 app/user/views.py:200 app/user/views.py:204
 msgid "Accounted"
 msgstr "Angerechnet"
 
-#: app/admin/views.py:64 app/admin/views.py:68 app/admin/views.py:503
-#: app/admin/views.py:507 app/user/views.py:203 app/user/views.py:207
+#: app/admin/views.py:62 app/admin/views.py:66 app/admin/views.py:498
+#: app/admin/views.py:502 app/user/views.py:201 app/user/views.py:205
 msgid "Timerule"
 msgstr "Zeitregel"
 
-#: app/admin/views.py:65 app/admin/views.py:69 app/admin/views.py:504
-#: app/admin/views.py:508 app/templates/admin/key-page.html:56
-#: app/templates/user/dashboard_advanced.html:91 app/user/views.py:204
-#: app/user/views.py:208
+#: app/admin/views.py:63 app/admin/views.py:67 app/admin/views.py:499
+#: app/admin/views.py:503 app/templates/admin/key-page.html:56
+#: app/templates/user/dashboard_advanced.html:91 app/user/views.py:202
+#: app/user/views.py:206
 msgid "Shaped"
 msgstr "Gedrosselt"
 
-#: app/admin/views.py:66 app/admin/views.py:70 app/admin/views.py:505
-#: app/admin/views.py:509 app/user/views.py:205 app/user/views.py:209
+#: app/admin/views.py:64 app/admin/views.py:68 app/admin/views.py:500
+#: app/admin/views.py:504 app/user/views.py:203 app/user/views.py:207
 msgid "Exceptions"
 msgstr "Ausnahmen"
 
-#: app/admin/views.py:167 app/admin/views.py:231 app/admin/views.py:683
-#: app/admin/views.py:748 app/admin/views.py:777
+#: app/admin/views.py:163 app/admin/views.py:227 app/admin/views.py:678
+#: app/admin/views.py:741 app/admin/views.py:770
 msgid "Please fill out all input forms."
 msgstr "Bitte alle Eingabefelder ausfüllen."
 
-#: app/admin/views.py:175
+#: app/admin/views.py:171
 msgid "An error occured while adding the registration code."
 msgstr ""
 "Es ist ein Fehler bei der Erstellung dieses Registrierungsschlüssels "
 "aufgetreten."
 
-#: app/admin/views.py:223
+#: app/admin/views.py:219
 msgid "Move date must be in the future."
 msgstr "Das Umzugsdatum muss in der Zukunft liegen."
 
-#: app/admin/views.py:238
-msgid ""
-"You can not schedule a move if the room and dormitory will stay the same."
+#: app/admin/views.py:234
+msgid "You can not schedule a move if the room and dormitory will stay the same."
 msgstr ""
 "Es ist nicht möglich einen Umzug zu planen, wenn Raum und Wohnheim gleich "
 "bleiben."
 
-#: app/admin/views.py:263
+#: app/admin/views.py:259
 msgid "Identity could not get changed."
 msgstr "Die Identität konnte nicht verändert werden."
 
-#: app/admin/views.py:298
+#: app/admin/views.py:294
 msgid "Error: Maximum number of characters exceeded."
 msgstr "Fehler: Maximale Zeichenanzahl wurde überschritten."
 
-#: app/admin/views.py:307 app/admin/views.py:420 app/admin/views.py:438
-#: app/admin/views.py:447 app/admin/views.py:456 app/admin/views.py:465
-#: app/admin/views.py:478 app/admin/views.py:495 app/admin/views.py:612
+#: app/admin/views.py:303 app/admin/views.py:415 app/admin/views.py:433
+#: app/admin/views.py:442 app/admin/views.py:451 app/admin/views.py:460
+#: app/admin/views.py:473 app/admin/views.py:490 app/admin/views.py:607
 msgid "An error occured."
 msgstr "Es ist ein Fehler aufgetreten."
 
-#: app/admin/views.py:320
+#: app/admin/views.py:316
 msgid "Device unregistered"
-msgstr "Gerät de-registriert."
+msgstr "Gerät de-registriert"
 
-#: app/admin/views.py:367 app/user/views.py:82 app/user/views.py:116
-#: app/user/views.py:149
+#: app/admin/views.py:363 app/user/views.py:80 app/user/views.py:114
+#: app/user/views.py:147
 msgid "Invalid registration key."
 msgstr "Ungültiger Registrierungsschlüssel."
 
-#: app/admin/views.py:402 app/admin/views.py:411 app/admin/views.py:429
+#: app/admin/views.py:397 app/admin/views.py:406 app/admin/views.py:424
 msgid "Input entered is invalid."
 msgstr "Die getätigten Eingaben sind fehlerbehaftet."
 
-#: app/admin/views.py:481
+#: app/admin/views.py:476
 msgid "Registration key successfully deleted."
 msgstr "Registrierungsschlüssel wurde erfolgreich gelöscht."
 
-#: app/admin/views.py:483
+#: app/admin/views.py:478
 msgid "Registration key deletion scheduled successfully."
 msgstr "Löschung des Registrierungsschlüssels wurde erfolgreich geplant."
 
-#: app/admin/views.py:497
+#: app/admin/views.py:492
 msgid "Canceled pending registration key deletion."
 msgstr "Geplante Löschung des Registrierungsschlüssels abgebrochen."
 
-#: app/admin/views.py:513 app/templates/admin/deregister-devices.html:50
+#: app/admin/views.py:508 app/templates/admin/deregister-devices.html:50
 #: app/templates/user/dashboard_advanced.html:93
 msgid "Yes"
 msgstr "Ja"
 
-#: app/admin/views.py:515 app/templates/admin/deregister-devices.html:51
+#: app/admin/views.py:510 app/templates/admin/deregister-devices.html:51
 #: app/templates/user/dashboard_advanced.html:95
 msgid "No"
 msgstr "Nein"
 
-#: app/admin/views.py:518 app/templates/admin/key-page.html:168
+#: app/admin/views.py:513 app/templates/admin/key-page.html:168
 #: app/templates/admin/key-page.html:192
 msgid "Enabled"
 msgstr "Aktiviert"
 
-#: app/admin/views.py:520 app/templates/admin/key-page.html:171
+#: app/admin/views.py:515 app/templates/admin/key-page.html:171
 #: app/templates/admin/key-page.html:195
 msgid "Disabled"
 msgstr "Deaktiviert"
 
-#: app/admin/views.py:600
+#: app/admin/views.py:595
 msgid "Invalid supervisor account."
 msgstr "Ungültiges Supervisor Konto."
 
-#: app/admin/views.py:621
+#: app/admin/views.py:616
 msgid "Password requirements not met."
 msgstr "Passwortanforderungen wurden nicht erreicht."
 
-#: app/admin/views.py:623
+#: app/admin/views.py:618
 msgid "Password changed."
 msgstr "Passwort geändert."
 
-#: app/admin/views.py:632
+#: app/admin/views.py:627
 msgid "Mail address entered is invalid."
 msgstr "Die eingegebene Mail Adresse ist ungültig."
 
-#: app/admin/views.py:634
+#: app/admin/views.py:629
 msgid "Mail address changed."
 msgstr "Die Mail Adresse wurde geändert."
 
-#: app/admin/views.py:641
+#: app/admin/views.py:636
 msgid "No other supervisor account left, cannot delete this one."
 msgstr "Dies ist das einzige Supervisor Konto, es kann nicht gelöscht werden."
 
-#: app/admin/views.py:646
+#: app/admin/views.py:641
 msgid "Error deleting account."
 msgstr "Fehler beim Löschen des Kontos."
 
-#: app/admin/views.py:649
+#: app/admin/views.py:644
 msgid "Account deleted."
 msgstr "Konto gelöscht."
 
-#: app/admin/views.py:688
+#: app/admin/views.py:683
 msgid "Account could not get created."
 msgstr "Das Konto konnte nicht erstellt werden."
 
-#: app/admin/views.py:744 app/admin/views.py:773
+#: app/admin/views.py:737 app/admin/views.py:766
 msgid "The notification cant be invalid before its valid time."
 msgstr ""
 "Die Benachrichtigung kann nicht vor ihrer Gültigkeit bereits ungültig sein."
 
-#: app/admin/views.py:753
+#: app/admin/views.py:746
 msgid "Notification could not get created."
 msgstr "Die Benachrichtigung konnte nicht erstellt werden."
 
-#: app/admin/views.py:782
+#: app/admin/views.py:775
 msgid "Notification could not get edited."
 msgstr "Die Benachrichtigung konnte nicht editiert werden."
 
-#: app/admin/views.py:788
+#: app/admin/views.py:781
 msgid "Notification does not exist."
 msgstr "Die Benachrichtigung existiert nicht."
 
-#: app/admin/views.py:800
+#: app/admin/views.py:793
 msgid "Notification deleted"
 msgstr "Die Benachrichtigung wurde gelöscht"
 
-#: app/admin/views.py:802
+#: app/admin/views.py:795
 msgid "An error occured while deleting the notification"
 msgstr "Es ist ein Fehler beim löschen der Benachrichtigung aufgetreten"
 
-#: app/admin/views.py:821
+#: app/admin/views.py:814
 msgid "Login to access that resource."
 msgstr "Anmelden um Zugriff auf die Ressource zu erhalten."
 
@@ -198,8 +197,8 @@ msgstr "Anmelden um Zugriff auf die Ressource zu erhalten."
 msgid "Supervisor Account Page"
 msgstr "Supervisor Kontokonfiguration"
 
-#: app/templates/admin/account-page.html:14
-#: app/templates/admin/accounts.html:14 app/templates/admin/add-account.html:14
+#: app/templates/admin/account-page.html:14 app/templates/admin/accounts.html:14
+#: app/templates/admin/add-account.html:14
 #: app/templates/admin/add-regcode.html:15
 #: app/templates/admin/create-notification.html:14
 #: app/templates/admin/dashboard.html:15
@@ -209,13 +208,12 @@ msgstr "Supervisor Kontokonfiguration"
 #: app/templates/admin/edit-notification.html:14
 #: app/templates/admin/key-page.html:15
 #: app/templates/admin/master-updates.html:15
-#: app/templates/admin/notifications.html:14
-#: app/templates/admin/regcodes.html:15
+#: app/templates/admin/notifications.html:14 app/templates/admin/regcodes.html:15
 msgid "Overview"
 msgstr "Übersicht"
 
-#: app/templates/admin/account-page.html:15
-#: app/templates/admin/accounts.html:15 app/templates/admin/add-account.html:15
+#: app/templates/admin/account-page.html:15 app/templates/admin/accounts.html:15
+#: app/templates/admin/add-account.html:15
 #: app/templates/admin/add-regcode.html:16
 #: app/templates/admin/create-notification.html:15
 #: app/templates/admin/dashboard.html:16
@@ -225,14 +223,13 @@ msgstr "Übersicht"
 #: app/templates/admin/edit-notification.html:15
 #: app/templates/admin/key-page.html:16
 #: app/templates/admin/master-updates.html:16
-#: app/templates/admin/notifications.html:15
-#: app/templates/admin/regcodes.html:16
+#: app/templates/admin/notifications.html:15 app/templates/admin/regcodes.html:16
 msgid "Registration Codes"
 msgstr "Registrierungscodes"
 
 #: app/templates/admin/account-page.html:16
-#: app/templates/admin/account-page.html:45
-#: app/templates/admin/accounts.html:16 app/templates/admin/add-account.html:16
+#: app/templates/admin/account-page.html:45 app/templates/admin/accounts.html:16
+#: app/templates/admin/add-account.html:16
 #: app/templates/admin/add-regcode.html:17
 #: app/templates/admin/create-notification.html:16
 #: app/templates/admin/dashboard.html:17
@@ -242,13 +239,12 @@ msgstr "Registrierungscodes"
 #: app/templates/admin/edit-notification.html:16
 #: app/templates/admin/key-page.html:17
 #: app/templates/admin/master-updates.html:17
-#: app/templates/admin/notifications.html:16
-#: app/templates/admin/regcodes.html:17
+#: app/templates/admin/notifications.html:16 app/templates/admin/regcodes.html:17
 msgid "Notifications"
 msgstr "Benachrichtigungen"
 
-#: app/templates/admin/account-page.html:18
-#: app/templates/admin/accounts.html:18 app/templates/admin/add-account.html:18
+#: app/templates/admin/account-page.html:18 app/templates/admin/accounts.html:18
+#: app/templates/admin/add-account.html:18
 #: app/templates/admin/add-regcode.html:19
 #: app/templates/admin/create-notification.html:18
 #: app/templates/admin/dashboard.html:19
@@ -258,13 +254,12 @@ msgstr "Benachrichtigungen"
 #: app/templates/admin/edit-notification.html:18
 #: app/templates/admin/key-page.html:19
 #: app/templates/admin/master-updates.html:19
-#: app/templates/admin/notifications.html:18
-#: app/templates/admin/regcodes.html:19
+#: app/templates/admin/notifications.html:18 app/templates/admin/regcodes.html:19
 msgid "Accounts"
 msgstr "Accounts"
 
-#: app/templates/admin/account-page.html:20
-#: app/templates/admin/accounts.html:20 app/templates/admin/add-account.html:20
+#: app/templates/admin/account-page.html:20 app/templates/admin/accounts.html:20
+#: app/templates/admin/add-account.html:20
 #: app/templates/admin/add-regcode.html:21
 #: app/templates/admin/create-notification.html:20
 #: app/templates/admin/dashboard.html:21
@@ -274,8 +269,7 @@ msgstr "Accounts"
 #: app/templates/admin/edit-notification.html:20
 #: app/templates/admin/key-page.html:21
 #: app/templates/admin/master-updates.html:21
-#: app/templates/admin/notifications.html:20
-#: app/templates/admin/regcodes.html:21
+#: app/templates/admin/notifications.html:20 app/templates/admin/regcodes.html:21
 msgid "Logout"
 msgstr "Abmelden"
 
@@ -286,10 +280,10 @@ msgstr "Konto:"
 #: app/templates/admin/account-page.html:46
 #: app/templates/admin/account-page.html:71
 #: app/templates/admin/account-page.html:83
-#: app/templates/admin/account-page.html:96
-#: app/templates/admin/key-page.html:151 app/templates/admin/key-page.html:164
-#: app/templates/admin/key-page.html:188 app/templates/admin/key-page.html:212
-#: app/templates/admin/key-page.html:232 app/templates/admin/key-page.html:252
+#: app/templates/admin/account-page.html:96 app/templates/admin/key-page.html:151
+#: app/templates/admin/key-page.html:164 app/templates/admin/key-page.html:188
+#: app/templates/admin/key-page.html:212 app/templates/admin/key-page.html:232
+#: app/templates/admin/key-page.html:252
 msgid "Description:"
 msgstr "Beschreibung:"
 
@@ -332,15 +326,14 @@ msgid ""
 "Minimum 10 characters, at least 1 number, 1 capital letter, 1 lower case "
 "letter, 1 special character."
 msgstr ""
-"Mindestens 10 Zeichen Länge, davon mind. 1 Zahl, 1 großer Buchstabe, 1 "
-"kleiner Buchstabe, 1 Sonderzeichen."
+"Mindestens 10 Zeichen Länge, davon mind. 1 Zahl, 1 großer Buchstabe, 1 kleiner "
+"Buchstabe, 1 Sonderzeichen."
 
 #: app/templates/admin/account-page.html:75
 msgid "Change Password"
 msgstr "Passwort ändern"
 
-#: app/templates/admin/account-page.html:82
-#: app/templates/admin/key-page.html:76
+#: app/templates/admin/account-page.html:82 app/templates/admin/key-page.html:76
 #: app/templates/user/dashboard_advanced.html:133
 msgid "Mail Address"
 msgstr "Emailadresse"
@@ -349,16 +342,15 @@ msgstr "Emailadresse"
 msgid "Changes the mail address."
 msgstr "Mail-Adresse ändern."
 
-#: app/templates/admin/account-page.html:84
-#: app/templates/admin/key-page.html:152 app/templates/admin/key-page.html:165
-#: app/templates/admin/key-page.html:189
+#: app/templates/admin/account-page.html:84 app/templates/admin/key-page.html:152
+#: app/templates/admin/key-page.html:165 app/templates/admin/key-page.html:189
 msgid "Allowed Values:"
 msgstr "Erlaubte Werte:"
 
 #: app/templates/admin/account-page.html:84
 #: app/templates/admin/add-account.html:51
 msgid "Only trusted mail servers: "
-msgstr "Vertrauenswürdige Mailserver:"
+msgstr "Vertrauenswürdige Mailserver: "
 
 #: app/templates/admin/account-page.html:85
 msgid "Current Value:"
@@ -380,7 +372,7 @@ msgstr ""
 
 #: app/templates/admin/account-page.html:98
 msgid "Delete Supervisor Account"
-msgstr "Supervisor-Konto löschen."
+msgstr "Supervisor-Konto löschen"
 
 #: app/templates/admin/accounts.html:6 app/templates/admin/accounts.html:36
 msgid "Supervisor Accounts"
@@ -396,15 +388,15 @@ msgid "Username"
 msgstr "Benutzername"
 
 #: app/templates/admin/accounts.html:52 app/templates/admin/add-account.html:48
-#: app/templates/admin/add-regcode.html:49
-#: app/templates/admin/edit-identity.html:49
-#: app/templates/admin/key-page.html:74 app/templates/admin/regcodes.html:59
+#: app/templates/admin/add-regcode.html:47
+#: app/templates/admin/edit-identity.html:49 app/templates/admin/key-page.html:74
+#: app/templates/admin/regcodes.html:59
 #: app/templates/user/dashboard_advanced.html:131
 msgid "Surname"
 msgstr "Nachname"
 
 #: app/templates/admin/accounts.html:53 app/templates/admin/add-account.html:46
-#: app/templates/admin/add-regcode.html:47
+#: app/templates/admin/add-regcode.html:49
 #: app/templates/admin/edit-identity.html:47
 #: app/templates/admin/master-updates.html:46
 #: app/templates/admin/master-updates.html:85
@@ -470,8 +462,7 @@ msgid "Dormitory"
 msgstr "Wohnheim"
 
 #: app/templates/admin/add-regcode.html:59
-#: app/templates/admin/edit-identity.html:64
-#: app/templates/admin/key-page.html:77
+#: app/templates/admin/edit-identity.html:64 app/templates/admin/key-page.html:77
 #: app/templates/admin/master-updates.html:58
 #: app/templates/admin/master-updates.html:113
 #: app/templates/admin/master-updates.html:155
@@ -587,11 +578,10 @@ msgstr "Nutzergeräte abmelden"
 
 #: app/templates/admin/deregister-devices.html:43
 msgid ""
-"The user has been moved into another room. It is recommended to unregister "
-"all currently registered devices of this user. Do you want to unregister "
-"these now?"
+"The user has been moved into another room. It is recommended to unregister all "
+"currently registered devices of this user. Do you want to unregister these now?"
 msgstr ""
-"Der Nutzer ist in einen neuen Raum ungezogen. Es ist empfohlen alle aktuell "
+"Der Nutzer ist in einen neuen Raum umgezogen. Es ist empfohlen alle aktuell "
 "angemeldeten Geräte des Nutzers abzumelden. Möchten Sie diese nun abmelden?"
 
 #: app/templates/admin/edit-identity.html:6
@@ -619,8 +609,7 @@ msgid "dormitory"
 msgstr "Wohnheim"
 
 #: app/templates/admin/edit-identity.html:83
-msgid ""
-"If you want to cancel this move or edit the room, click the button below."
+msgid "If you want to cancel this move or edit the room, click the button below."
 msgstr ""
 "Wenn Sie diesen Umzugstermin abbrechen oder den Raum editieren möchten, dann "
 "nutzen Sie den Button hierunter."
@@ -769,11 +758,11 @@ msgstr "Zählung deaktivieren"
 
 #: app/templates/admin/key-page.html:212
 msgid ""
-"Disables traffic accounting for this user. Use this to grant unlimited "
-"traffic to this user."
+"Disables traffic accounting for this user. Use this to grant unlimited traffic "
+"to this user."
 msgstr ""
 "Deaktiviert die Datenvolumenzählung für den Nutzer. Benutzen Sie diese "
-"Funktion um dem Nutzer unlimitiertes Volumen zu gewähren"
+"Funktion um dem Nutzer unlimitiertes Volumen zu gewähren."
 
 #: app/templates/admin/key-page.html:214
 msgid "Accounting Enabled"
@@ -794,9 +783,9 @@ msgid ""
 "able to go online until activated again."
 msgstr ""
 "Benutzen Sie diese Option, wenn ein Nutzer zeitweise aus seiner Wohnung "
-"ausgezogen ist oder gegen die Nutzungsrichtlinien verstoßen hat. Alle "
-"Geräte, die mit diesem Code registriert wurden, haben dann keinen "
-"Onlinezugriff mehr, bis der Code wieder aktiviert wurde."
+"ausgezogen ist oder gegen die Nutzungsrichtlinien verstoßen hat. Alle Geräte, "
+"die mit diesem Code registriert wurden, haben dann keinen Onlinezugriff mehr, "
+"bis der Code wieder aktiviert wurde."
 
 #: app/templates/admin/key-page.html:234
 msgid "Registration Code Active"
@@ -820,14 +809,13 @@ msgstr "Registrierungscode löschen"
 
 #: app/templates/admin/key-page.html:252
 msgid ""
-"Use this if an user moved out of his apartment permanently. All user data "
-"will get deleted and all devices registered with this code will go offline "
-"on deletion date."
+"Use this if an user moved out of his apartment permanently. All user data will "
+"get deleted and all devices registered with this code will go offline on "
+"deletion date."
 msgstr ""
-"Nutzen Sie diese Funktion wenn ein Nutzer permanent auszieht. Alle "
-"Nutzerdaten werden gelöscht und die mit dem Registrierungsschlüssel "
-"registrierten Geräte werden ab dem Auszugsdatum keine Verbindung zum "
-"Internet mehr aufbauen können."
+"Nutzen Sie diese Funktion wenn ein Nutzer permanent auszieht. Alle Nutzerdaten "
+"werden gelöscht und die mit dem Registrierungsschlüssel registrierten Geräte "
+"werden ab dem Auszugsdatum keine Verbindung zum Internet mehr aufbauen können."
 
 #: app/templates/admin/key-page.html:253
 msgid "Important:"
@@ -839,8 +827,7 @@ msgid ""
 "happen immediately! Be careful!"
 msgstr ""
 "Wenn kein Auszugsdatum / Löschdatum angegeben wurde wird der "
-"Registrierungsschlüssel mit sofortiger Wirkung gelöscht! Seien Sie "
-"vorsichtig!"
+"Registrierungsschlüssel mit sofortiger Wirkung gelöscht! Seien Sie vorsichtig!"
 
 #: app/templates/admin/key-page.html:256
 msgid "Move-Out Date / Date of deletion (optional):"
@@ -958,14 +945,15 @@ msgstr "Studentenwohnheim Görlitz"
 
 #: app/templates/errors/400.html:7 app/templates/errors/400.html:14
 msgid "Bad Request"
-msgstr "Veraltete/ungültige Anfrage"
+msgstr "Fehlerhafte Anfrage"
 
 #: app/templates/errors/400.html:15
 msgid ""
-"The request could not be processed. Leave this page in order to progress."
+"The request could not be processed. Please inform the network administrator "
+"about this issue."
 msgstr ""
-"Die Anfrage konnte nicht bearbeitet werden. Verlasse diese Seite um "
-"fortzufahren."
+"Die Anfrage konnte nicht verarbeitet werden. Bitte informieren Sie den "
+"Netzwerk-Administrator über diesen Fehler."
 
 #: app/templates/errors/403.html:7 app/templates/errors/403.html:14
 #: app/templates/errors/404.html:7 app/templates/errors/404.html:14
@@ -999,7 +987,7 @@ msgstr "Lonely Client / YOLO-Netzwerk"
 
 #: app/templates/errors/backend_lost.html:15
 msgid "Lost connection to Traffy backend server."
-msgstr "Keine Verbindung zum Traffy-Backendserver"
+msgstr "Keine Verbindung zum Traffy-Backendserver."
 
 #: app/templates/errors/deactivated.html:7
 #: app/templates/errors/deactivated.html:14
@@ -1009,15 +997,14 @@ msgstr "Zugriff deaktiviert"
 #: app/templates/errors/deactivated.html:16
 msgid ""
 "Your registration key has been deactivated. Possible reasons could be that "
-"your tenancy agreement with Studentenwerk Dresden has expired or that you "
-"have violated against the Rahmennetzordnung. If you think that this is a "
-"mistake, then please inform the network administrator. Code: 995"
+"your tenancy agreement with Studentenwerk Dresden has expired or that you have "
+"violated against the Rahmennetzordnung. If you think that this is a mistake, "
+"then please inform the network administrator. Code: 995"
 msgstr ""
 "Dein Registrierungscode wurde deaktiviert. Mögliche Gründe dafür sind, dass "
 "dein Mietvertrag mit dem Studentenwerk Dresden ausgelaufen ist oder das du "
 "gegen die Rahmennetzordnung verstoßen hast. Wenn du glaubst, dass dies ein "
-"Missverständnis ist, dann informiere bitte den Netzwerkadministrator. Code: "
-"995"
+"Missverständnis ist, dann informiere bitte den Netzwerkadministrator. Code: 995"
 
 #: app/templates/errors/deactivated.html:18
 msgid "Your registration key has been deactivated. Reason:"
@@ -1039,11 +1026,11 @@ msgid ""
 "your device with. You have to deregister your device first to switch the "
 "network port, or ask an network administrator to do so for you."
 msgstr ""
-"Ein Gerät mit identischer Zugangskennung ist bereits im Netzwerk "
-"registriert. Dies ist höchstwahrscheinlich nicht der Netzwerkanschluss, an "
-"dem Du dieses Gerät ursprünglich registriert hast. Du musst dieses Gerät "
-"zuerst deregistrieren oder einen Netzwerkadministrator bitten, dies für dich "
-"zu tun, um den Netzwerkanschluss wechseln zu können."
+"Ein Gerät mit identischer Zugangskennung ist bereits im Netzwerk registriert. "
+"Dies ist höchstwahrscheinlich nicht der Netzwerkanschluss, an dem Du dieses "
+"Gerät ursprünglich registriert hast. Du musst dieses Gerät zuerst "
+"deregistrieren oder einen Netzwerkadministrator bitten, dies für dich zu tun, "
+"um den Netzwerkanschluss wechseln zu können."
 
 #: app/templates/errors/no_lease.html:7 app/templates/errors/no_lease.html:14
 msgid "Misconfigured Endpoint"
@@ -1094,11 +1081,11 @@ msgstr "Übersicht"
 
 #: app/templates/user/about.html:29
 msgid ""
-"You were automatically redirected to this page because you seem to be "
-"located outside of the dormitory network."
+"You were automatically redirected to this page because you seem to be located "
+"outside of the dormitory network."
 msgstr ""
-"Sie wurden automatisch auf diese Seite umgeleitet da sie anscheinend nicht "
-"aus dem Wohnheimnetz heraus zugreifen."
+"Sie wurden automatisch auf diese Seite umgeleitet da sie anscheinend nicht aus "
+"dem Wohnheimnetz heraus zugreifen."
 
 #: app/templates/user/about.html:32
 msgid "General"
@@ -1147,14 +1134,14 @@ msgstr "Lizenzrechtliche Informationen"
 #: app/templates/user/about.html:67
 msgid ""
 "This program is free software: you can redistribute it and/or modify</p>\n"
-"          <p>it under the terms of the GNU General Public License as "
-"published by</p>\n"
+"          <p>it under the terms of the GNU General Public License as published "
+"by</p>\n"
 "          <p>the Free Software Foundation, either version 3 of the License, "
 "or</p>\n"
 "          <p>(at your option) any later version.</p></br>\n"
 "        \n"
-"          <p>This program is distributed in the hope that it will be useful,"
-"</p>\n"
+"          <p>This program is distributed in the hope that it will be useful,</"
+"p>\n"
 "          <p>but WITHOUT ANY WARRANTY; without even the implied warranty of</"
 "p>\n"
 "          <p>MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</"
@@ -1174,13 +1161,13 @@ msgstr ""
 "\n"
 "          <p>Die Veröffentlichung dieses Programms erfolgt in der Hoffnung, "
 "daß es Ihnen von Nutzen sein wird,</p>\n"
-"          <p>aber OHNE IRGENDEINE GARANTIE, sogar ohne die implizite "
-"Garantie der MARKTREIFE oder der</p>\n"
-"          <p>VERWENDBARKEIT FÜR EINEN BESTIMMTEN ZWECK. Details finden Sie "
-"in der GNU General Public License.</p></br>\n"
+"          <p>aber OHNE IRGENDEINE GARANTIE, sogar ohne die implizite Garantie "
+"der MARKTREIFE oder der</p>\n"
+"          <p>VERWENDBARKEIT FÜR EINEN BESTIMMTEN ZWECK. Details finden Sie in "
+"der GNU General Public License.</p></br>\n"
 "\n"
-"          <p>Sie sollten ein Exemplar der GNU General Public License "
-"zusammen mit diesem Programm erhalten haben.</p>\n"
+"          <p>Sie sollten ein Exemplar der GNU General Public License zusammen "
+"mit diesem Programm erhalten haben.</p>\n"
 "          <p>Falls nicht, siehe"
 
 #: app/templates/user/conditions.html:6 app/templates/user/conditions.html:19
@@ -1288,22 +1275,20 @@ msgstr "Ein Registrierungsschlüssel wird für den Netzwerkzugriff benötigt"
 msgid "Register"
 msgstr "Anmelden"
 
-#: app/user/views.py:88 app/user/views.py:122 app/user/views.py:155
-msgid ""
-"Your registration key got deactivated. Please contact the administrator."
+#: app/user/views.py:86 app/user/views.py:120 app/user/views.py:153
+msgid "Your registration key got deactivated. Please contact the administrator."
 msgstr ""
-"Dein Registrierungscode wurde deaktiviert. Bitte kontaktiere den "
-"Administrator."
+"Dein Registrierungscode wurde deaktiviert. Bitte kontaktiere den Administrator."
 
-#: app/user/views.py:90 app/user/views.py:124 app/user/views.py:157
+#: app/user/views.py:88 app/user/views.py:122 app/user/views.py:155
 msgid "Your registration key got deactivated. Reason: "
 msgstr "Dein Registrierungscode wurde deaktiviert. Grund: "
 
-#: app/user/views.py:95
+#: app/user/views.py:93
 msgid "Maximum number of devices already registered."
 msgstr "Maximale Anzahl an Geräten ist bereits registriert."
 
-#: app/user/views.py:290
+#: app/user/views.py:288
 msgid "Invalid voucher"
 msgstr "Ungültiger Aktionscode"
 
@@ -1370,8 +1355,7 @@ msgstr "Ungültiger Aktionscode"
 
 #~ msgid "Use this if an user moved into another room."
 #~ msgstr ""
-#~ "Nutzen Sie diese Funktion um einen Nutzer in einen anderen Raum "
-#~ "umzuziehen."
+#~ "Nutzen Sie diese Funktion um einen Nutzer in einen anderen Raum umzuziehen."
 
 #~ msgid "Current Room:"
 #~ msgstr "Derzeitiger Raum:"
@@ -1383,8 +1367,8 @@ msgstr "Ungültiger Aktionscode"
 #~ msgstr "Geplantes Umzugsdatum (optional):"
 
 #~ msgid ""
-#~ "Minimum 20 characters, at least 5 numbers, 5 capital letters, 5 lower "
-#~ "case letters, 5 special characters."
+#~ "Minimum 20 characters, at least 5 numbers, 5 capital letters, 5 lower case "
+#~ "letters, 5 special characters."
 #~ msgstr ""
 #~ "Mindestens 20 Zeichen, davon mindestens 5 Zahlen, 5 Großbuchstaben, 5 "
 #~ "Kleinbuchstaben und 5 Sonderzeichen"
@@ -1394,8 +1378,8 @@ msgstr "Ungültiger Aktionscode"
 
 #~ msgid ""
 #~ "Use this if an user moved out of his apartment permanently. All user data "
-#~ "will get deleted and all devices registered with this code will go "
-#~ "offline immediately."
+#~ "will get deleted and all devices registered with this code will go offline "
+#~ "immediately."
 #~ msgstr ""
 #~ "Benutzen Sie diese Option, wenn ein Nutzer permanent ausgezogen ist. Alle "
 #~ "Nutzerdaten werden gelöscht und alle mit diesem Code registrierten Geräte "
@@ -1439,9 +1423,9 @@ msgstr "Ungültiger Aktionscode"
 
 #~ msgid ""
 #~ "A misconfigured device has attempted to gain access to the network using "
-#~ "forged credentials that match yours. For security reasons, your access "
-#~ "has been temporarily blocked. Please contact the network administrator. "
-#~ "Code: 950"
+#~ "forged credentials that match yours. For security reasons, your access has "
+#~ "been temporarily blocked. Please contact the network administrator. Code: "
+#~ "950"
 #~ msgstr ""
 #~ "Ein fehlerhaft konfiguriertes Endgerät hat versucht, mit gefälschten "
 #~ "Zugangsdaten - welchen deinen entsprechen, Zugriff auf das Netzwerk zu "
@@ -1453,5 +1437,11 @@ msgstr "Ungültiger Aktionscode"
 #~ "to the network. PLEASE REFRAIN FROM WRITING IMMEDIATE SUPPORT TICKETS!"
 #~ msgstr ""
 #~ "Es können bis zu 10 Minuten vergehen bis ein neu eingestecktes Gerät "
-#~ "Zugriff auf das Netzwerk erhält. BITTE SEHEN SIE DAVON AB WÄHRENDDESSEN "
-#~ "EIN SUPPORT TICKET ZU ERÖFFNEN!"
+#~ "Zugriff auf das Netzwerk erhält. BITTE SEHEN SIE DAVON AB WÄHRENDDESSEN EIN "
+#~ "SUPPORT TICKET ZU ERÖFFNEN!"
+
+#~ msgid ""
+#~ "The request could not be processed. Leave this page in order to progress."
+#~ msgstr ""
+#~ "Die Anfrage konnte nicht bearbeitet werden. Verlasse diese Seite um "
+#~ "fortzufahren."
