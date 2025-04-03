@@ -405,35 +405,34 @@ class AccountingThread(threading.Thread):
         if traffic_query is not None:
             credit = traffic_query.credit
 
-            if traffic_query.ingress + traffic_query.egress + ingress_used + egress_used >= credit or credit <= 0:
-                if inactive:
-                    return
+            if inactive:
+                return
 
+            if in_unlimited_time_range is True:
+                if reg_key_query.id in self.accounting_srv.shaped_reg_keys:
+                    self.__disable_traffic_shaping_for_reg_key(session, reg_key_query)
+                    self.__update_traffic_shaped_values(session, traffic_query, ingress_used, egress_used, ingress_excepted_used, egress_excepted_used)
+                    self.accounting_srv.shaped_reg_keys.remove(reg_key_query.id)
+                else:
+                    self.__update_traffic_unlimited_range_values(session, traffic_query, ingress_used, egress_used, ingress_excepted_used, egress_excepted_used)
+                return
+
+            if traffic_query.ingress + traffic_query.egress + ingress_used + egress_used >= credit or credit <= 0:
                 if reg_key_query.id in self.accounting_srv.shaped_reg_keys:
                     self.__update_traffic_shaped_values(session, traffic_query, ingress_used, egress_used, ingress_excepted_used, egress_excepted_used)
                 else:
-                    if in_unlimited_time_range is True:
-                        self.__update_traffic_unlimited_range_values(session, traffic_query, ingress_used, egress_used, ingress_excepted_used, egress_excepted_used)
-                    else:
-                        self.__update_traffic_values(session, traffic_query, ingress_used, egress_used, ingress_excepted_used, egress_excepted_used)
+                    self.__update_traffic_values(session, traffic_query, ingress_used, egress_used, ingress_excepted_used, egress_excepted_used)
                     self.accounting_srv.shaped_reg_keys.append(reg_key_query.id)
                     self.__enable_traffic_shaping_for_reg_key(session, reg_key_query)
 
                     identity_query = session.query(Identity).filter_by(id=reg_key_query.identity).first()
             else:
-                if inactive:
-                    return
-
                 if reg_key_query.id not in self.accounting_srv.shaped_reg_keys:
-                    if in_unlimited_time_range is True:
-                        self.__update_traffic_unlimited_range_values(session, traffic_query, ingress_used, egress_used, ingress_excepted_used, egress_excepted_used)
-                    else:
-                        self.__update_traffic_values(session, traffic_query, ingress_used, egress_used, ingress_excepted_used, egress_excepted_used)
+                    self.__update_traffic_values(session, traffic_query, ingress_used, egress_used, ingress_excepted_used, egress_excepted_used)
                 else:
                     self.__disable_traffic_shaping_for_reg_key(session, reg_key_query)
                     self.__update_traffic_shaped_values(session, traffic_query, ingress_used, egress_used, ingress_excepted_used, egress_excepted_used)
                     self.accounting_srv.shaped_reg_keys.remove(reg_key_query.id)
-
             return
 
         # New Day Check
@@ -532,26 +531,27 @@ class AccountingThread(threading.Thread):
             return
         else:
             # Missing Traffic Entries
-            day_range = int(self.accounting_srv.get_max_saved_volume(gib=True) / self.accounting_srv.get_daily_topup_volume(gib=True))
-            volume_start_day = date - timedelta(days=day_range)
-            collected_credit = 0
-            days_iterative = []
-            for day in rrule.rrule(rrule.DAILY, dtstart=volume_start_day, until=date):
-                days_iterative.append(day)
+            traffic_query = session.query(Traffic).filter_by(reg_key=reg_key_query.id).order_by(Traffic.timestamp.desc()).first()
+            day_range = date - traffic_query.timestamp
 
-            days_iterative.reverse()
+            topup_volume = self.accounting_srv.get_daily_topup_volume()
+            if reg_key_query.daily_topup_volume is not None:
+                topup_volume = reg_key_query.daily_topup_volume
 
-            for day in days_iterative:
-                traffic_query = session.query(Traffic).filter_by(reg_key=reg_key_query.id, timestamp=day).first()
-                if traffic_query is not None:
-                    collected_credit = traffic_query.credit + self.accounting_srv.get_daily_topup_volume()
-                    break
+            credit = traffic_query.credit + (topup_volume * day_range.days)
+
+            max_volume = self.accounting_srv.get_max_saved_volume()
+            if reg_key_query.max_volume is not None:
+                max_volume = reg_key_query.max_volume
+
+            if credit > max_volume:
+                credit = max_volume
 
             try:
                 if in_unlimited_time_range is True:
                     row = Traffic(reg_key=reg_key_query.id,
                                 timestamp=date,
-                                credit=collected_credit,
+                                credit=credit,
                                 ingress=0,
                                 egress=0,
                                 ingress_shaped=0,
@@ -563,7 +563,7 @@ class AccountingThread(threading.Thread):
                 else:
                     row = Traffic(reg_key=reg_key_query.id,
                                 timestamp=date,
-                                credit=collected_credit,
+                                credit=credit,
                                 ingress=ingress_used,
                                 egress=egress_used,
                                 ingress_shaped=0,
