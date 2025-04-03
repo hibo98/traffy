@@ -19,7 +19,6 @@
 
 import config
 import dbus
-import subprocess
 import threading
 import trap_listener
 import util
