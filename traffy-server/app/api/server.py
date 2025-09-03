@@ -1106,7 +1106,7 @@ class ServerAPI:
         identity_query = session.query(Identity).filter_by(id=reg_key_query.identity).first()
         first_name = identity_query.first_name
         last_name = identity_query.last_name
-        room = identity_query.room
+        room = identity_query.room + " [" + self.get_dormitory_name_from_id(identity_query.dormitory_id) + "]"
 
         session.close()
         return first_name, last_name, room
