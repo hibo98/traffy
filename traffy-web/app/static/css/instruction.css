@@ -1,11 +1,13 @@
 @font-face {
-  font-family: "Bitter-Regular";
+  font-family: "Bitter";
   src: url("../fonts/Bitter-Regular.otf") format("opentype");
+  font-weight: normal;
 }
 
 @font-face {
-  font-family: "Bitter-Bold";
+  font-family: "Bitter";
   src: url("../fonts/Bitter-Bold.otf") format("opentype");
+  font-weight: bold;
 }
 
 @font-face {
@@ -14,17 +16,23 @@
 }
 
 body {
-  font-family: Bitter-Regular;
+  font-family: Bitter;
 }
 
 h1 {
   font-size: 20px;
   line-height: 20px;
+  font-weight: bold;
 }
 
 h3 {
   font-size: 16px;
   color: #6e6e6e;
+  font-weight: bold;
+}
+
+strong {
+  font-weight: bold;
 }
 
 .section {
@@ -86,14 +94,13 @@ h3 {
 }
 
 .instruction-count h2 {
-  font-size: 20px;
   line-height: 20px;
   display: table-cell;
   margin: 0;
   height: 50px;
   font-family: OpenSans-Regular;
   font-weight: normal;
-  font-size: 50px;
+  font-size: 40px;
   color: #0011b2;
   vertical-align: bottom;
 }

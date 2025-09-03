@@ -10,7 +10,7 @@
         <h1>Internet im Studierendenwohnheim {{ community }}</h1>
         <div class="tight">
             <h3>Das Wohnheimnetz ist Teil des Hochschulnetzwerks.</h3>
-            <h3>Daher existiert eine Datenvolumensbegrenzung für alle Nutzer:innen.</h3>
+            <h3>Daher gibt es eine Begrenzung des Datenvolumens für alle Nutzer:innen.</h3>
         </div>
     </div>
         
@@ -19,41 +19,42 @@
     </div>
     
     <div class="justify">
-        <p><strong>Ansparmodell: </strong>Du erhältst jeden Tag <strong>{{ daily_topup_volume }} GiB</strong> gutgeschrieben. Von 8 bis 18 Uhr erfolgt keine Verbrauchszählung. Am Ende des Tages wird dein unverbrauchtes Datenvolumen in den darauf folgenden Tag mitgenommen. Das Ansparmodell erlaubt es dir, insgesamt <strong>{{ max_saved_volume}} GiB</strong> anzusparen.</p>
+        <p><strong>Ansparmodell: </strong>Du erhältst jeden Tag <strong>{{ daily_topup_volume }} GiB</strong> dazu. Vom Datenvolumen wird nur zwischen 18 und 8 Uhr abgerechnet, sonst wird der Verbrauch nicht gezählt. Nicht verbrauchtes Volumen wird auf den nächsten Tag übertragen, maximal bis <strong>{{ max_saved_volume}} GiB</strong>.</p>
         
-        <p><strong>Aufbrauch: </strong>Nach Aufbrauch deines Datenvolumens wird dein Internetzugang auf eine Geschwindigkeit von <strong>{{ shaping_speed }}/s</strong> gedrosselt. Einzig die Hochschulinfrastruktur (z.B. OPAL) ist weiterhin in voller Geschwindigkeit verfügbar. Sobald der Tag herum ist und du somit <strong>{{ daily_topup_volume}} GiB</strong> gutgeschrieben bekommst, ist die Geschwindigkeitsbeschränkung wieder aufgehoben.</p>
+        <p><strong>Wenn das Volumen aufgebraucht ist: </strong>Nach Aufbrauch deines Datenvolumens wird dein Internetzugang auf eine Geschwindigkeit von <strong>{{ shaping_speed }}/s</strong> gedrosselt. Einzig die Hochschulinfrastruktur (z.B. OPAL) ist weiterhin in voller Geschwindigkeit verfügbar. Mit der nächsten täglichen Gutschrift von <strong>{{ daily_topup_volume}} GiB</strong> wird die Drosselung automatisch wieder aufgehoben.</p>
     </div>
     
     <div class="divider"></div>
 
     <div class="section">
-        <h1>Internet in the {{ community }} student dormitory</h1>
+        <h1>Internet in the Student Dormitory {{ community }}</h1>
         <div class="tight">
             <h3>The dormitory network is part of the university network.</h3>
-            <h3>Because of this, there is a data volume limit for each user.</h3>
+            <h3>Therefore, there is a data limit for all users.</h3>
         </div>
     </div>
         
     <div class="info-box">
-        <p>Your initial data volume is: <strong>{{ initial_volume }} GiB</strong></p>
+        <p>Your initial volume is: <strong>{{ initial_volume }} GiB</strong></p>
     </div>
     
     <div class="justify">
-        <p><strong>Savings: </strong>Each day you get a credit of <strong>{{ daily_topup_volume }} GiB</strong>. There is no traffic accounting from 8 AM to 6 PM. At the end of the day, your remaining data volume will be transferred to the following day. This allows you to save a total amount of <strong>{{ max_saved_volume}} GiB</strong>.</p>
+        <p><strong>Savings: </strong>You receive <strong>{{ daily_topup_volume }} GiB</strong> every day. Data usage is only counted between 6 PM and 8 AM; during the day (8 AM – 6 PM) usage is not counted. Unused data is carried over to the next day, up to a maximum of <strong>{{ max_saved_volume}} GiB</strong>.</p>
         
-        <p><strong>Used up: </strong>After using up your data volume, your Internet access will be limited to a speed of <strong>{{ shaping_speed }}/s</strong>. The university infrastructure (e.g. learning platforms) remains to be accessible at full speed. As soon as the day is over and you're getting another <strong>{{ daily_topup_volume}} GiB</strong>, the speed limitation will be removed.</p>
+        <p><strong>When your data is used up: </strong>Your internet speed will be reduced to <strong>{{ shaping_speed }}/s</strong>. Only university services (e.g. learning platforms) will remain at full speed. With the next daily credit of <strong>{{ daily_topup_volume}} GiB</strong>, the speed limit will be lifted automatically.</p>
     </div>
     
     <div class="divider"></div>
 
     <div class="justify">
+        <p><strong>Fragen oder Hilfe benötigt? / Any questions or help needed?</strong></p>
         {% for admin in admins %}
         <p><strong>Netzadministrator: </strong>{{ admin[0] }}<br/>
         <strong>E-Mail: </strong>{{ admin[1] }}<br/>
-        <strong>Zi-Nr. / Room: </strong>{{ admin[2] }}</p>
+        <strong>Anschrift / Address: </strong>{{ admin[2] }}</p>
         {% endfor %}
     </div>
-    
+
     <footer>
       <hr></hr>
         <p>Mieter:in / Tenant: {{ last_name }}, {{ first_name }} | Raum / Room: {{ room }}<br/>
@@ -74,7 +75,7 @@
         <div class="instruction-text">
             <h3>Verbinde dein Gerät mit dem Ethernet-Anschluss</h3>
             <div class="instruction-description">
-                <p>Empfohlen wird die Nutzung eines (W-)LAN Routers.</p>
+                <p>Empfohlen wird die Nutzung eines Routers.</p>
             </div>
         </div>
     </div>
@@ -101,9 +102,9 @@
         </div>
 
         <div class="instruction-description">
-            <p>Eine Registrierung ist für jedes Gerät nur beim ersten Verbinden nötig. Du kannst maximal {{ max_devices }} Geräte mit deinem Registrierungsschlüssel verknüpfen. Es ist dir allerdings jederzeit möglich ein Gerät zu deregistrieren um dafür ein anderes zu registrieren. Dein Registrierungsschlüssel:</p>
+            <p>Eine Registrierung ist für jedes Gerät nur beim ersten Verbinden nötig. Du kannst maximal {{ max_devices }} Geräte mit deinem Registrierungsschlüssel verknüpfen. Es ist dir allerdings jederzeit möglich ein Gerät zu deregistrieren um dafür ein anderes zu registrieren.</p>
             <div class="info-box">
-                <p><strong>{{ reg_key }}</strong></p>
+                <p>Registrierungsschlüssel: <strong>{{ reg_key }}</strong></p>
                 <p>Achte darauf deinen Registrierungsschlüssel nicht zu verlieren und halte ihn geheim!</p>
             </div>
         </div>
@@ -112,7 +113,7 @@
             <h2>4</h2>
         </div>
         <div class="instruction-text">
-            <h3>Akzeptiere die Rahmennetzordnung</h3>
+            <h3>Akzeptiere die Rahmennetzordnung & Datenschutzerklärung</h3>
         </div>
 
         <div class="instruction-count">
@@ -123,25 +124,7 @@
         </div>
 
         <div class="instruction-description">
-            <div class="info-box">
-                <p><strong>Tipp: </strong>Besuche regelmäßig <strong>{{ traffy_ip }}</strong> oder <strong>{{ traffy_domain }}</strong> in deinem Browser um dein Datenvolumen abzufragen.</p>
-            </div>
-        </div>
-
-        <div class="instruction-count">
-            <h2>?</h2>
-        </div>
-        <div class="instruction-text">
-            <h3 style="padding-left: 4px;">Fragen oder Hilfe benötigt?</h3>
-        </div>
- 
-        <div class="instruction-description">
-            <br/>
-            {% for admin in admins %}
-            <p><strong>Netzadministrator: </strong>{{ admin[0] }}<br/>
-            <strong>E-Mail: </strong>{{ admin[1] }}<br/>
-            <strong>Zi-Nr.: </strong>{{ admin[2] }}</p>
-            {% endfor %}
+            <p><strong>Tipp: </strong>Besuche regelmäßig <strong>{{ traffy_ip }}</strong> oder <strong>{{ traffy_domain }}</strong> in deinem Browser um dein Datenvolumen abzufragen.</p>
         </div>
 
         <footer>
@@ -164,7 +147,7 @@
         <div class="instruction-text">
             <h3>Connect your device to the Ethernet port</h3>
             <div class="instruction-description">
-                <p>The use of a Wi-Fi/LAN router is advised.</p>
+                <p>The use of a router is advised.</p>
             </div>
         </div>
     </div>
@@ -191,9 +174,9 @@
         </div>
 
         <div class="instruction-description">
-            <p>The registration is necessary only once when connecting a device for the first time. You can associate a maximum of {{ max_devices }} devices with your registration key. However, it is always possible to unregister a device in favor of another one. Your registration key:</p>
+            <p>The registration is necessary only once when connecting a device for the first time. You can associate a maximum of {{ max_devices }} devices with your registration key. However, it is always possible to unregister a device in favor of another one.</p>
             <div class="info-box">
-                <p><strong>{{ reg_key }}</strong></p>
+                <p>Your registration key: <strong>{{ reg_key }}</strong></p>
                 <p>Make sure not to lose your registration key and keep it in secret!</p>
             </div>
         </div>
@@ -202,7 +185,7 @@
             <h2>4</h2>
         </div>
         <div class="instruction-text">
-            <h3>Accept the Rahmennetzordnung (Terms and conditions)</h3>
+            <h3>Accept the Terms and Conditions & Privacy Policy</h3>
         </div>
 
         <div class="instruction-count">
@@ -213,25 +196,7 @@
         </div>
 
         <div class="instruction-description">
-            <div class="info-box">
-                <p><strong>Hint: </strong>Visit regularly <strong>{{ traffy_ip }}</strong> or <strong>{{ traffy_domain }}</strong> in your Browser to check your remaining data volume.</p>
-            </div>
-        </div>
-
-        <div class="instruction-count">
-            <h2>?</h2>
-        </div>
-        <div class="instruction-text">
-            <h3 style="padding-left: 4px;">Any questions or help needed?</h3>
-        </div>
- 
-        <div class="instruction-description">
-            <br/>
-            {% for admin in admins %}
-            <p><strong>Network administrator: </strong>{{ admin[0] }}<br/>
-            <strong>Email: </strong>{{ admin[1] }}<br/>
-            <strong>Room: </strong>{{ admin[2] }}</p>
-            {% endfor %}
+            <p><strong>Hint: </strong>Visit regularly <strong>{{ traffy_ip }}</strong> or <strong>{{ traffy_domain }}</strong> in your Browser to check your remaining data volume.</p>
         </div>
 
         <footer>
