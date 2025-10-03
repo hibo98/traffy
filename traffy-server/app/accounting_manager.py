@@ -532,15 +532,15 @@ class AccountingThread(threading.Thread):
         else:
             # Missing Traffic Entries
             traffic_query = session.query(Traffic).filter_by(reg_key=reg_key_query.id).order_by(Traffic.timestamp.desc()).first()
-            day_range = date - traffic_query.timestamp
+            day_range = date - traffic_query.timestamp.date()
 
-            topup_volume = self.accounting_srv.get_daily_topup_volume()
+            topup_volume = self.accounting_srv.get_daily_topup_volume(gib=True)
             if reg_key_query.daily_topup_volume is not None:
                 topup_volume = reg_key_query.daily_topup_volume
 
             credit = traffic_query.credit + (topup_volume * day_range.days)
 
-            max_volume = self.accounting_srv.get_max_saved_volume()
+            max_volume = self.accounting_srv.get_max_saved_volume(gib=True)
             if reg_key_query.max_volume is not None:
                 max_volume = reg_key_query.max_volume
 
