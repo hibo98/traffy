@@ -68,6 +68,17 @@ class IntegrationService:
             else:
                 erp_ib_needed = False
 
+            if erp_first_name is None \
+                    or erp_last_name is None \
+                    or erp_mail is None \
+                    or erp_traffy_dormitory_id is None \
+                    or erp_room is None:
+                continue
+
+            erp_first_name = erp_first_name.strip().strip(';').strip()
+            erp_last_name = erp_last_name.strip().strip(';').strip()
+            erp_mail = erp_mail.strip().strip(';').strip()
+
             traffy_identity_query = (self.traffy_session.query(TraffyIdentity)
                                      .filter_by(customer_id=erp_debitor_id).all())
 
@@ -80,11 +91,11 @@ class IntegrationService:
                     update_room = None
 
                     if traffy_identity.first_name != erp_first_name:
-                        update_first_name = erp_first_name.strip().strip(';').strip()
+                        update_first_name = erp_first_name
                     if traffy_identity.last_name != erp_last_name:
-                        update_last_name = erp_last_name.strip().strip(';').strip()
+                        update_last_name = erp_last_name
                     if traffy_identity.mail != erp_mail:
-                        update_mail = erp_mail.strip().strip(';').strip()
+                        update_mail = erp_mail
                     if traffy_identity.dormitory_id != erp_traffy_dormitory_id:
                         update_dormitory_id = erp_traffy_dormitory_id
                     if traffy_identity.room != erp_room:
@@ -122,17 +133,15 @@ class IntegrationService:
         self.traffy_session.close()
         self.erp_session.close()
 
-    def __mark_identity_as_new(self, customer_id, first_name, last_name, mail, dormitory_id, room):
-        if first_name is None or last_name is None or mail is None or dormitory_id is None or room is None:
-            return
 
+    def __mark_identity_as_new(self, customer_id, first_name, last_name, mail, dormitory_id, room):
         traffy_identity_new_query = self.traffy_session.query(IdentityNew).filter_by(customer_id=customer_id).all()
 
         if len(traffy_identity_new_query) == 0:
             row = IdentityNew(customer_id=customer_id,
-                              first_name=first_name.strip().strip(';').strip(),
-                              last_name=last_name.strip().strip(';').strip(),
-                              mail=mail.strip().strip(';').strip(),
+                              first_name=first_name,
+                              last_name=last_name,
+                              mail=mail,
                               dormitory_id=dormitory_id,
                               room=room)
             self.traffy_session.add(row)
