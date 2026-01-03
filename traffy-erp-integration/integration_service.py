@@ -112,6 +112,8 @@ class IntegrationService:
 
         traffy_master_data_query = self.traffy_session.query(TraffyIdentity).all()
         for traffy_row in traffy_master_data_query:
+            if traffy_row.customer_id == 0:
+                continue
             erp_identity_query = self.erp_session.query(ERPMaster).filter_by(debitor_id=traffy_row.customer_id).all()
             if len(erp_identity_query) == 0:
                 self.__mark_identity_as_deletable(traffy_row.id)
