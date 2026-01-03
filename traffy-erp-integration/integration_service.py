@@ -147,8 +147,10 @@ class IntegrationService:
 
 
     def __mark_identity_as_deletable(self, identity_id):
-        row = IdentityDelete(identity_id=identity_id)
-        self.traffy_session.add(row)
+        identity_delete = self.traffy_session.query(IdentityDelete).filter_by(identity_id=identity_id).all()
+        if len(identity_delete) == 0:
+            row = IdentityDelete(identity_id=identity_id)
+            self.traffy_session.add(row)
 
 
     def __clear_identity_updates_table(self):
