@@ -105,11 +105,6 @@ class IntegrationService:
                                                           update_dormitory_id,
                                                           update_room)
             else:
-                if erp_first_name is not None and erp_last_name is not None:
-                    if "Baublockierung" in erp_first_name or \
-                            "Baublockierung" in erp_last_name:
-                        continue
-
                 self.__mark_identity_as_new(customer_id=erp_debitor_id,
                                             first_name=erp_first_name,
                                             last_name=erp_last_name,
@@ -127,6 +122,9 @@ class IntegrationService:
         erp_session.close()
 
     def __mark_identity_as_new(self, customer_id, first_name, last_name, mail, dormitory_id, room):
+        if first_name is None or last_name is None or mail is None or dormitory_id is None or room is None:
+            return
+
         traffy_session = self.db_traffy.create_session()
         traffy_identity_new_query = traffy_session.query(IdentityNew).filter_by(customer_id=customer_id).all()
 
