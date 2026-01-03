@@ -40,27 +40,23 @@ def decrypt_data(data):
 
 
 class IntegrationService:
-    db_traffy = NotImplemented
-    db_erp = NotImplemented
-
-    def __init__(self):
-        self.db_traffy = database_manager.DatabaseManagerTraffy()
-        self.db_erp = database_manager.DatabaseManagerERP()
+    erp_session = NotImplemented
+    traffy_session = NotImplemented
 
     def run_service(self):
+        self.erp_session = database_manager.DatabaseManagerERP().create_session()
+        erp_master_data_query = self.erp_session.query(ERPMaster).filter(ERPMaster.dormitory_id.in_(config.RELEVANT_DORMITORY_IDS)).all()
+
+        self.traffy_session = database_manager.DatabaseManagerTraffy().create_session()
+
         self.__clear_identity_updates_table()
-
-        erp_session = self.db_erp.create_session()
-        erp_master_data_query = erp_session.query(ERPMaster).filter(ERPMaster.dormitory_id.in_(config.RELEVANT_DORMITORY_IDS)).all()
-
-        traffy_session = self.db_traffy.create_session()
 
         for erp_row in erp_master_data_query:
             erp_debitor_id = erp_row.debitor_id
             erp_first_name = decrypt_data(erp_row.first_name)
             erp_last_name = decrypt_data(erp_row.last_name)
             erp_mail = decrypt_data(erp_row.mail)
-            erp_traffy_dormitory_id = (traffy_session.query(TraffyDormitory)
+            erp_traffy_dormitory_id = (self.traffy_session.query(TraffyDormitory)
                                        .filter_by(internal_id=erp_row.dormitory_id).first().id)
             erp_room = erp_row.room
             erp_ib_needed = erp_row.ib_needed
@@ -72,7 +68,8 @@ class IntegrationService:
             else:
                 erp_ib_needed = False
 
-            traffy_identity_query = traffy_session.query(TraffyIdentity).filter_by(customer_id=erp_debitor_id).all()
+            traffy_identity_query = (self.traffy_session.query(TraffyIdentity)
+                                     .filter_by(customer_id=erp_debitor_id).all())
 
             if len(traffy_identity_query) > 0:
                 for traffy_identity in traffy_identity_query:
@@ -111,22 +108,23 @@ class IntegrationService:
                                             mail=erp_mail,
                                             dormitory_id=erp_traffy_dormitory_id,
                                             room=erp_room)
+        self.traffy_session.commit()
 
-        traffy_master_data_query = traffy_session.query(TraffyIdentity).all()
+        traffy_master_data_query = self.traffy_session.query(TraffyIdentity).all()
         for traffy_row in traffy_master_data_query:
-            erp_identity_query = erp_session.query(ERPMaster).filter_by(debitor_id=traffy_row.customer_id).all()
+            erp_identity_query = self.erp_session.query(ERPMaster).filter_by(debitor_id=traffy_row.customer_id).all()
             if len(erp_identity_query) == 0:
                 self.__mark_identity_as_deletable(traffy_row.id)
 
-        traffy_session.close()
-        erp_session.close()
+        self.traffy_session.commit()
+        self.traffy_session.close()
+        self.erp_session.close()
 
     def __mark_identity_as_new(self, customer_id, first_name, last_name, mail, dormitory_id, room):
         if first_name is None or last_name is None or mail is None or dormitory_id is None or room is None:
             return
 
-        traffy_session = self.db_traffy.create_session()
-        traffy_identity_new_query = traffy_session.query(IdentityNew).filter_by(customer_id=customer_id).all()
+        traffy_identity_new_query = self.traffy_session.query(IdentityNew).filter_by(customer_id=customer_id).all()
 
         if len(traffy_identity_new_query) == 0:
             row = IdentityNew(customer_id=customer_id,
@@ -135,53 +133,30 @@ class IntegrationService:
                               mail=mail,
                               dormitory_id=dormitory_id,
                               room=room)
-            traffy_session.add(row)
-
-        traffy_session.commit()
-        traffy_session.close()
+            self.traffy_session.add(row)
 
 
     def __mark_identity_as_updatable(self, identity_id, first_name, last_name, mail, dormitory_id, room):
-        traffy_session = self.db_traffy.create_session()
-        try:
-            row = IdentityUpdate(identity_id=identity_id,
-                                 first_name=first_name,
-                                 last_name=last_name,
-                                 mail=mail,
-                                 dormitory_id=dormitory_id,
-                                 room=room)
-            traffy_session.add(row)
-            traffy_session.commit()
-        except Exception as ex:
-            import traceback
-            traceback.print_exc()
-            traffy_session.rollback()
-        finally:
-            traffy_session.close()
+        row = IdentityUpdate(identity_id=identity_id,
+                             first_name=first_name,
+                             last_name=last_name,
+                             mail=mail,
+                             dormitory_id=dormitory_id,
+                             room=room)
+        self.traffy_session.add(row)
 
 
     def __mark_identity_as_deletable(self, identity_id):
-        traffy_session = self.db_traffy.create_session()
-        try:
-            row = IdentityDelete(identity_id=identity_id)
-            traffy_session.add(row)
-            traffy_session.commit()
-        except:
-            traffy_session.rollback()
-        finally:
-            traffy_session.close()
+        row = IdentityDelete(identity_id=identity_id)
+        self.traffy_session.add(row)
 
 
     def __clear_identity_updates_table(self):
-        traffy_session = self.db_traffy.create_session()
-
         try:
-            traffy_session.query(IdentityUpdate).delete()
-            traffy_session.commit()
+            self.traffy_session.query(IdentityUpdate).delete()
+            self.traffy_session.commit()
         except:
-            traffy_session.rollback()
-        finally:
-            traffy_session.close()
+            self.traffy_session.rollback()
 
 
 integration_service = IntegrationService()
