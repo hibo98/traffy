@@ -20,7 +20,7 @@ import database_manager
 import pyaes
 import codecs
 import config
-from models import ERPMaster, IdentityUpdate, TraffyDormitory, TraffyIdentity
+from models import ERPMaster, IdentityUpdate, TraffyDormitory, TraffyIdentity, IdentityNew, IdentityDelete
 
 
 def decrypt_data(data):
@@ -51,7 +51,7 @@ class IntegrationService:
         self.__clear_identity_updates_table()
 
         erp_session = self.db_erp.create_session()
-        erp_master_data_query = erp_session.query(ERPMaster).all()
+        erp_master_data_query = erp_session.query(ERPMaster).filter(ERPMaster.dormitory_id.in_(config.RELEVANT_DORMITORY_IDS)).all()
 
         traffy_session = self.db_traffy.create_session()
 
@@ -60,7 +60,8 @@ class IntegrationService:
             erp_first_name = decrypt_data(erp_row.first_name)
             erp_last_name = decrypt_data(erp_row.last_name)
             erp_mail = decrypt_data(erp_row.mail)
-            erp_dormitory_id = erp_row.dormitory_id
+            erp_traffy_dormitory_id = (traffy_session.query(TraffyDormitory)
+                                       .filter_by(internal_id=erp_row.dormitory_id).first().id)
             erp_room = erp_row.room
             erp_ib_needed = erp_row.ib_needed
             erp_ib_expiry_date = erp_row.ib_expiry_date
@@ -73,82 +74,84 @@ class IntegrationService:
 
             traffy_identity_query = traffy_session.query(TraffyIdentity).filter_by(customer_id=erp_debitor_id).all()
 
-            traffy_identity_updated = False
             if len(traffy_identity_query) > 0:
                 for traffy_identity in traffy_identity_query:
-                    if traffy_identity.first_name != erp_first_name or \
-                            traffy_identity.last_name != erp_last_name or \
-                            traffy_identity.mail != erp_mail or \
-                            traffy_session.query(TraffyDormitory).filter_by(
-                                id=traffy_identity.dormitory_id).first() != erp_dormitory_id or \
-                            traffy_identity.room != erp_room:
-                        traffy_identity_updated = True
+                    update_first_name = None
+                    update_last_name = None
+                    update_mail = None
+                    update_dormitory_id = None
+                    update_room = None
 
-                    if erp_dormitory_id not in config.RELEVANT_DORMITORY_IDS:
-                        self.__mark_identity_as_deletable(traffy_identity.id, traffy_identity.customer_id)
-                        continue
+                    if traffy_identity.first_name != erp_first_name:
+                        update_first_name = erp_first_name
+                    if traffy_identity.last_name != erp_last_name:
+                        update_last_name = erp_last_name
+                    if traffy_identity.mail != erp_mail:
+                        update_mail = erp_mail
+                    if traffy_identity.dormitory_id != erp_traffy_dormitory_id:
+                        update_dormitory_id = erp_traffy_dormitory_id
+                    if traffy_identity.room != erp_room:
+                        update_room = erp_room
 
-                    if traffy_identity_updated is True:
+                    if update_first_name is not None \
+                        or update_last_name is not None \
+                        or update_mail is not None \
+                        or update_dormitory_id is not None \
+                        or update_room is not None:
                         self.__mark_identity_as_updatable(traffy_identity.id,
-                                                          erp_debitor_id,
-                                                          traffy_identity.customer_id,
-                                                          erp_first_name,
-                                                          erp_last_name,
-                                                          erp_mail,
-                                                          erp_dormitory_id,
-                                                          erp_room,
-                                                          erp_ib_needed,
-                                                          erp_ib_expiry_date,
-                                                          erp_contract_expiry_date)
+                                                          update_first_name,
+                                                          update_last_name,
+                                                          update_mail,
+                                                          update_dormitory_id,
+                                                          update_room)
             else:
-                if erp_dormitory_id not in config.RELEVANT_DORMITORY_IDS:
-                    continue
-
                 if erp_first_name is not None and erp_last_name is not None:
                     if "Baublockierung" in erp_first_name or \
                             "Baublockierung" in erp_last_name:
                         continue
 
-                self.__mark_identity_as_updatable(None,
-                                                  erp_debitor_id,
-                                                  None,
-                                                  erp_first_name,
-                                                  erp_last_name,
-                                                  erp_mail,
-                                                  erp_dormitory_id,
-                                                  erp_room,
-                                                  erp_ib_needed,
-                                                  erp_ib_expiry_date,
-                                                  erp_contract_expiry_date)
+                self.__mark_identity_as_new(customer_id=erp_debitor_id,
+                                            first_name=erp_first_name,
+                                            last_name=erp_last_name,
+                                            mail=erp_mail,
+                                            dormitory_id=erp_traffy_dormitory_id,
+                                            room=erp_room)
 
         traffy_master_data_query = traffy_session.query(TraffyIdentity).all()
         for traffy_row in traffy_master_data_query:
-            traffy_customer_id = traffy_row.customer_id
-
             erp_identity_query = erp_session.query(ERPMaster).filter_by(debitor_id=traffy_row.customer_id).all()
-
             if len(erp_identity_query) == 0:
-                self.__mark_identity_as_deletable(traffy_row.id, traffy_row.customer_id)
+                self.__mark_identity_as_deletable(traffy_row.id)
 
         traffy_session.close()
         erp_session.close()
 
-    def __mark_identity_as_updatable(self, identity_id, new_customer_id, old_customer_id, first_name, last_name,
-                                     mail, dormitory_id, room, ib_needed, ib_expiry_date, contract_expiry_date):
-        print(new_customer_id)
+    def __mark_identity_as_new(self, customer_id, first_name, last_name, mail, dormitory_id, room):
+        traffy_session = self.db_traffy.create_session()
+        traffy_identity_new_query = traffy_session.query(IdentityNew).filter_by(customer_id=customer_id).all()
+
+        if len(traffy_identity_new_query) == 0:
+            row = IdentityNew(customer_id=customer_id,
+                              first_name=first_name,
+                              last_name=last_name,
+                              mail=mail,
+                              dormitory_id=dormitory_id,
+                              room=room)
+            traffy_session.add(row)
+
+        traffy_session.commit()
+        traffy_session.close()
+
+
+    def __mark_identity_as_updatable(self, identity_id, first_name, last_name, mail, dormitory_id, room):
         traffy_session = self.db_traffy.create_session()
         try:
             row = IdentityUpdate(identity_id=identity_id,
-                                 new_customer_id=new_customer_id,
-                                 old_customer_id=old_customer_id,
                                  first_name=first_name,
                                  last_name=last_name,
                                  mail=mail,
                                  dormitory_id=dormitory_id,
-                                 room=room,
-                                 ib_needed=ib_needed,
-                                 ib_expiry_date=ib_expiry_date,
-                                 contract_expiry_date=contract_expiry_date)
+                                 room=room)
             traffy_session.add(row)
             traffy_session.commit()
         except Exception as ex:
@@ -156,21 +159,20 @@ class IntegrationService:
             traceback.print_exc()
             traffy_session.rollback()
         finally:
-            #traffy_session.close()
-            pass
+            traffy_session.close()
 
-    def __mark_identity_as_deletable(self, identity_id, customer_id):
-        self.__mark_identity_as_updatable(identity_id,
-                                          None,
-                                          customer_id,
-                                          None,
-                                          None,
-                                          None,
-                                          None,
-                                          None,
-                                          None,
-                                          None,
-                                          None)
+
+    def __mark_identity_as_deletable(self, identity_id):
+        traffy_session = self.db_traffy.create_session()
+        try:
+            row = IdentityDelete(identity_id=identity_id)
+            traffy_session.add(row)
+            traffy_session.commit()
+        except:
+            traffy_session.rollback()
+        finally:
+            traffy_session.close()
+
 
     def __clear_identity_updates_table(self):
         traffy_session = self.db_traffy.create_session()
@@ -181,8 +183,7 @@ class IntegrationService:
         except:
             traffy_session.rollback()
         finally:
-            #traffy_session.close()
-            pass
+            traffy_session.close()
 
 
 integration_service = IntegrationService()

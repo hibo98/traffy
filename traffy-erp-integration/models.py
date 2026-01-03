@@ -128,8 +128,9 @@ class IdentityUpdate(Base):
     ib_expiry_date = db.Column(db.Date, nullable=True)
     contract_expiry_date = db.Column(db.Date, nullable=True)
 
-    def __init__(self, identity_id, new_customer_id, old_customer_id, first_name, last_name, mail, dormitory_id,
-                 room, ib_needed, ib_expiry_date, contract_expiry_date):
+    def __init__(self, identity_id, new_customer_id = None, old_customer_id = None, first_name = None, last_name = None,
+                 mail = None, dormitory_id = None, room = None, ib_needed = None, ib_expiry_date = None,
+                 contract_expiry_date = None):
         self.identity_id = identity_id
         self.new_customer_id = new_customer_id
         self.old_customer_id = old_customer_id
@@ -144,3 +145,38 @@ class IdentityUpdate(Base):
 
     def __repr__(self):
         return "<IdentityUpdate %r>" % self.id
+
+
+class IdentityNew(Base):
+    __tablename__ = "identity_new"
+
+    id = db.Column(db.BigInteger, primary_key=True, autoincrement=True)
+    customer_id = db.Column(db.BigInteger, nullable=False)
+    first_name = db.Column(db.String(500),nullable=False)
+    last_name = db.Column(db.String(500), nullable=False)
+    mail = db.Column(db.String(500), nullable=False)
+    dormitory_id = db.Column(db.BigInteger, nullable=False)
+    room = db.Column(db.String(20), nullable=False)
+
+    def __init__(self, customer_id, first_name, last_name, mail, dormitory_id, room):
+        self.customer_id = customer_id
+        self.first_name = first_name
+        self.last_name = last_name
+        self.mail = mail
+        self.dormitory_id = dormitory_id
+        self.room = room
+
+    def __repr__(self):
+        return "<IdentityNew %r>" % self.id
+
+
+class IdentityDelete(Base):
+    __tablename__ = "identity_delete"
+    identity_id = db.Column(db.BigInteger, primary_key=True)
+
+    def __init__(self, identity_id):
+        self.identity_id = identity_id
+
+    def __repr__(self):
+        return "<IdentityDelete %r>" % self.identity_id
+
