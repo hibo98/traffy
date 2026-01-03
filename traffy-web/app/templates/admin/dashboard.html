@@ -34,14 +34,6 @@
     {% endfor %}
     <div class="page-box">
       <div class="content-box">
-        {% if master_data_updates_available %}
-        <a href="{{ url_for('admin.master_updates') }}">
-          <div class="message-box">
-            <div class="message-box-badge sync"></div>
-            <p>{{ _("Master data updates are available! Click here to view the available updates.") }}</p>
-          </div>
-        </a>
-        {% endif %}
         <h1>{{ _("Total traffic consumption") }}</h1>
         <div class="supervisor-divider"></div>
         <div class="chart-container">
