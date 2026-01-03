@@ -53,9 +53,9 @@ class IntegrationService:
 
         for erp_row in erp_master_data_query:
             erp_debitor_id = erp_row.debitor_id
-            erp_first_name = decrypt_data(erp_row.first_name).strip().strip(';').strip()
-            erp_last_name = decrypt_data(erp_row.last_name).strip().strip(';').strip()
-            erp_mail = decrypt_data(erp_row.mail).strip().strip(';').strip()
+            erp_first_name = decrypt_data(erp_row.first_name)
+            erp_last_name = decrypt_data(erp_row.last_name)
+            erp_mail = decrypt_data(erp_row.mail)
             erp_traffy_dormitory_id = (self.traffy_session.query(TraffyDormitory)
                                        .filter_by(internal_id=erp_row.dormitory_id).first().id)
             erp_room = erp_row.room
@@ -80,11 +80,11 @@ class IntegrationService:
                     update_room = None
 
                     if traffy_identity.first_name != erp_first_name:
-                        update_first_name = erp_first_name
+                        update_first_name = erp_first_name.strip().strip(';').strip()
                     if traffy_identity.last_name != erp_last_name:
-                        update_last_name = erp_last_name
+                        update_last_name = erp_last_name.strip().strip(';').strip()
                     if traffy_identity.mail != erp_mail:
-                        update_mail = erp_mail
+                        update_mail = erp_mail.strip().strip(';').strip()
                     if traffy_identity.dormitory_id != erp_traffy_dormitory_id:
                         update_dormitory_id = erp_traffy_dormitory_id
                     if traffy_identity.room != erp_room:
@@ -130,9 +130,9 @@ class IntegrationService:
 
         if len(traffy_identity_new_query) == 0:
             row = IdentityNew(customer_id=customer_id,
-                              first_name=first_name,
-                              last_name=last_name,
-                              mail=mail,
+                              first_name=first_name.strip().strip(';').strip(),
+                              last_name=last_name.strip().strip(';').strip(),
+                              mail=mail.strip().strip(';').strip(),
                               dormitory_id=dormitory_id,
                               room=room)
             self.traffy_session.add(row)
