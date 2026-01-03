@@ -53,9 +53,9 @@ class IntegrationService:
 
         for erp_row in erp_master_data_query:
             erp_debitor_id = erp_row.debitor_id
-            erp_first_name = decrypt_data(erp_row.first_name)
-            erp_last_name = decrypt_data(erp_row.last_name)
-            erp_mail = decrypt_data(erp_row.mail)
+            erp_first_name = decrypt_data(erp_row.first_name).strip().strip(';').strip()
+            erp_last_name = decrypt_data(erp_row.last_name).strip().strip(';').strip()
+            erp_mail = decrypt_data(erp_row.mail).strip().strip(';').strip()
             erp_traffy_dormitory_id = (self.traffy_session.query(TraffyDormitory)
                                        .filter_by(internal_id=erp_row.dormitory_id).first().id)
             erp_room = erp_row.room
