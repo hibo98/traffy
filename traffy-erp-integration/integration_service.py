@@ -135,6 +135,9 @@ class IntegrationService:
 
 
     def __mark_identity_as_new(self, customer_id, first_name, last_name, mail, dormitory_id, room):
+        if customer_id > 90000000:
+            return
+
         traffy_identity_new_query = self.traffy_session.query(IdentityNew).filter_by(customer_id=customer_id).all()
 
         if len(traffy_identity_new_query) == 0:
