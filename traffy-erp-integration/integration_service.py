@@ -77,7 +77,7 @@ class IntegrationService:
 
             erp_first_name = erp_first_name.strip().strip(';').strip()
             erp_last_name = erp_last_name.strip().strip(';').strip()
-            erp_mail = erp_mail.strip().strip(';').strip()
+            erp_mail = self.__cleanup_mail(erp_mail.strip().strip(';').strip())
 
             traffy_identity_query = (self.traffy_session.query(TraffyIdentity)
                                      .filter_by(customer_id=erp_debitor_id).all())
@@ -173,6 +173,11 @@ class IntegrationService:
             self.traffy_session.commit()
         except:
             self.traffy_session.rollback()
+
+
+    def __cleanup_mail(self, mail):
+        return ";".join(list(set(mail.lower().split(';'))))
+
 
 
 integration_service = IntegrationService()
