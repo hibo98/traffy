@@ -17,10 +17,12 @@
  along with this program; if not, see <http://www.gnu.org/licenses/>.
 """
 import database_manager
+import datetime
 import pyaes
 import codecs
 import config
-from models import ERPMaster, IdentityUpdate, TraffyDormitory, TraffyIdentity, IdentityNew, IdentityDelete
+from models import ERPMaster, IdentityUpdate, TraffyDormitory, TraffyIdentity, IdentityNew, IdentityDelete, ERPHistory, \
+    SyncState
 
 
 def decrypt_data(data):
@@ -50,6 +52,7 @@ class IntegrationService:
         self.traffy_session = database_manager.DatabaseManagerTraffy().create_session()
 
         self.__clear_identity_updates_table()
+        self.__enforce_sync_state_rows()
 
         for erp_row in erp_master_data_query:
             erp_debitor_id = erp_row.debitor_id
@@ -129,6 +132,15 @@ class IntegrationService:
             if len(erp_identity_query) == 0:
                 self.__mark_identity_as_deletable(traffy_row.id)
 
+        erp_history = self.erp_session.query(ERPHistory).order_by(ERPHistory.id.desc()).first()
+        last_insert_date = erp_history.insert_date
+
+        erp_state = self.traffy_session.query(SyncState).filter(SyncState.name == "erp").first()
+        erp_state.timestamp = last_insert_date
+
+        adapter_state = self.traffy_session.query(SyncState).filter(SyncState.name == "adapter").first()
+        adapter_state.timestamp = datetime.datetime.now()
+
         self.traffy_session.commit()
         self.traffy_session.close()
         self.erp_session.close()
@@ -173,6 +185,20 @@ class IntegrationService:
             self.traffy_session.commit()
         except:
             self.traffy_session.rollback()
+
+
+    def __enforce_sync_state_rows(self):
+        erp_state = self.traffy_session.query(SyncState).filter(SyncState.name == "erp").first()
+        if erp_state is None:
+            erp_row = SyncState(name="erp",
+                                timestamp = datetime.datetime.fromtimestamp(0))
+            self.traffy_session.add(erp_row)
+
+        adapter_state = self.traffy_session.query(SyncState).filter(SyncState.name == "adapter").first()
+        if adapter_state is None:
+            adapter_row = SyncState(name="adapter",
+                                    timestamp = datetime.datetime.fromtimestamp(0))
+            self.traffy_session.add(adapter_row)
 
 
     def __cleanup_mail(self, mail):

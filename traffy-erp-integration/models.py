@@ -180,3 +180,17 @@ class IdentityDelete(Base):
     def __repr__(self):
         return "<IdentityDelete %r>" % self.identity_id
 
+
+class SyncState(Base):
+    __tablename__ = "sync_state"
+    id = db.Column(db.BigInteger, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(100), unique=True, nullable=False)
+    timestamp = db.Column(db.DateTime, nullable=False)
+
+    def __init__(self, name, timestamp):
+        self.name = name
+        self.timestamp = timestamp
+
+    def __repr__(self):
+        return "<SyncState %r>" % self.name
+
