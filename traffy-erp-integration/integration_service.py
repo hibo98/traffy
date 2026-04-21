@@ -191,13 +191,13 @@ class IntegrationService:
         erp_state = self.traffy_session.query(SyncState).filter(SyncState.name == "erp").first()
         if erp_state is None:
             erp_row = SyncState(name="erp",
-                                timestamp = datetime.datetime.fromtimestamp(0))
+                                timestamp = datetime.datetime.fromisocalendar(2000, 1, 1))
             self.traffy_session.add(erp_row)
 
         adapter_state = self.traffy_session.query(SyncState).filter(SyncState.name == "adapter").first()
         if adapter_state is None:
             adapter_row = SyncState(name="adapter",
-                                    timestamp = datetime.datetime.fromtimestamp(0))
+                                    timestamp = datetime.datetime.fromisocalendar(2000, 1, 1))
             self.traffy_session.add(adapter_row)
 
 
