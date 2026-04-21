@@ -71,7 +71,7 @@ def dashboard():
 
     show_erp = server.is_erp_integration_enabled()
 
-    master_data_updates_available = server.is_master_updates_available()
+    erp_integration_status = server.get_erp_integration_status()
 
     return render_template("/admin/dashboard.html",
                            labels=labels,
@@ -96,7 +96,12 @@ def dashboard():
                            average_credit=average_credit,
                            shaped_users=shaped_users,
                            show_erp=show_erp,
-                           master_data_updates_available=master_data_updates_available)
+                           erp_erp_status=erp_integration_status["erp"],
+                           erp_erp_status_timestamp=erp_integration_status["erp_timestamp"],
+                           erp_adapter_status=erp_integration_status["adapter"],
+                           erp_adapter_status_timestamp=erp_integration_status["adapter_timestamp"],
+                           erp_traffy_status=erp_integration_status["traffy"],
+                           erp_traffy_status_timestamp=erp_integration_status["traffy_timestamp"])
 
 @admin.route("/admin/master-updates", methods=["GET", "POST"])
 @login_required
