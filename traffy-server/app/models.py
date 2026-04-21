@@ -249,6 +249,51 @@ class IdentityUpdate(Base):
     def __repr__(self):
         return "<IdentityUpdate %r>" % self.id
 
+class IdentityNew(Base):
+    __tablename__ = "identity_new"
+
+    id = db.Column(db.BigInteger, primary_key=True, autoincrement=True)
+    customer_id = db.Column(db.BigInteger, nullable=False)
+    first_name = db.Column(db.String(500),nullable=False)
+    last_name = db.Column(db.String(500), nullable=False)
+    mail = db.Column(db.String(500), nullable=False)
+    dormitory_id = db.Column(db.BigInteger, nullable=False)
+    room = db.Column(db.String(20), nullable=False)
+
+    def __init__(self, customer_id, first_name, last_name, mail, dormitory_id, room):
+        self.customer_id = customer_id
+        self.first_name = first_name
+        self.last_name = last_name
+        self.mail = mail
+        self.dormitory_id = dormitory_id
+        self.room = room
+
+    def __repr__(self):
+        return "<IdentityNew %r>" % self.id
+
+class IdentityDelete(Base):
+    __tablename__ = "identity_delete"
+    identity_id = db.Column(db.BigInteger, primary_key=True)
+
+    def __init__(self, identity_id):
+        self.identity_id = identity_id
+
+    def __repr__(self):
+        return "<IdentityDelete %r>" % self.identity_id
+
+class SyncState(Base):
+    __tablename__ = "sync_state"
+    id = db.Column(db.BigInteger, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(100), unique=True, nullable=False)
+    timestamp = db.Column(db.DateTime, nullable=False)
+
+    def __init__(self, name, timestamp):
+        self.name = name
+        self.timestamp = timestamp
+
+    def __repr__(self):
+        return "<SyncState %r>" % self.name
+
 def create_all(engine):
     Base.metadata.create_all(engine)
 

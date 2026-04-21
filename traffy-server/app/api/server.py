@@ -18,7 +18,8 @@
 """
 
 from app.exceptions.user_exceptions import RegistrationError, DatabaseError, DeregistrationError
-from ..models import IdentityUpdate, RegistrationKey, IpAddress, MacAddress, AddressPair, Traffic, Identity, Dormitory
+from ..models import IdentityUpdate, RegistrationKey, IpAddress, MacAddress, AddressPair, Traffic, Identity, Dormitory, \
+    SyncState
 from ..util import tc_manager, nftables_manager
 from datetime import datetime, timedelta
 from dateutil import rrule
@@ -1126,8 +1127,35 @@ class ServerAPI:
         session.close()
 
     def get_erp_integration_status(self):
+        return {
+            "erp": self.__get_integration_status("erp")[0],
+            "erp_timestamp": self.__get_integration_status("erp")[1],
+            "adapter": self.__get_integration_status("adapter")[0],
+            "adapter_timestamp": self.__get_integration_status("erp")[1],
+            "traffy": "error",
+            "traffy_timestamp": None,
+        }
+
+    def __get_integration_status(self, sync_type):
         session = self.db.create_session()
+        state = "error"
+        timestamp = None
+
+        erp_state = self.db.query(SyncState).filter(SyncState.name == sync_type).first()
+        if erp_state is None:
+            state = "error"
+        elif erp_state.timestamp > datetime.now() - timedelta(hours=25):
+            timestamp = erp_state.timestamp
+            state = "ok"
+        elif erp_state.timestamp > datetime.now() - timedelta(hours=49):
+            timestamp = erp_state.timestamp
+            state = "warning"
+        else:
+            timestamp = erp_state.timestamp
+            state = "error"
+
         session.close()
+        return state, timestamp
 
     def get_identity_master_data_updates_createable(self):
         session = self.db.create_session()
